@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "WebSafe Sentinel",
+  "version": "1.0",
+  "description": "Scan websites for vulnerabilities",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+    "16": "hi.png",
+    "48": "hi.png",
+    "128": "hi.png"
+    }
+  },
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": ["<all_urls>"]
+}
