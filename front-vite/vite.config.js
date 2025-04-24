@@ -1,25 +1,25 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import { viteStaticCopy } from 'vite-plugin-static-copy'
-import { resolve } from 'path'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  plugins: [
-    react(),
-    viteStaticCopy({
-      targets: [
-        { src: 'public/manifest.json', dest: '.' },
-        { src: 'public/hi.png', dest: '.' }
-      ]
-    })
-  ],
-  build: {
-    rollupOptions: {
-      input: {
-        popup: resolve(__dirname, 'index.html')  // 👈 load this for popup
-      }
+  plugins: [react()],
+  server: {
+    port: 5173,
+    open: true,
+    proxy: {
+      '/scan': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+      },
     },
+  },
+  build: {
     outDir: 'dist',
-    emptyOutDir: true
-  }
-})
+    rollupOptions: {
+      // Remove or correct the input option; Vite uses src/main.jsx by default
+      // input: 'public/index.html', // Remove this line
+    },
+  },
+  publicDir: 'public', // Ensures public assets (e.g., hi.png) are copied to dist
+});
+

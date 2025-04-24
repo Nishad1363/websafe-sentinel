@@ -19,8 +19,15 @@ def home():
 def scan():
     data = request.get_json()
     url = data.get("url")
+
     if not url:
-        return jsonify({"error": "No URL provided"}), 400
+        return jsonify({"error": "URL cannot be empty."}), 400
+
+    if not url.startswith(('http://', 'https://')):
+        return jsonify({"error": "URL must start with http:// or https://"}), 400
+
+    if url.endswith('/'):
+        url = url[:-1]  # Remove trailing slash
 
     result = run_all_scans(url)
     return jsonify(result)

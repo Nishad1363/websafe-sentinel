@@ -2,15 +2,17 @@
   "manifest_version": 3,
   "name": "WebSafe Sentinel",
   "version": "1.0",
-  "description": "Scan websites for vulnerabilities",
-  "action": {
-    "default_popup": "index.html",
-    "default_icon": {
-    "16": "hi.png",
-    "48": "hi.png",
-    "128": "hi.png"
+  "description": "Web security scanning tool",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+
+
+  "web_accessible_resources": [
+    {
+      "resources": ["index.css", "App.css"],
+      "matches": ["<all_urls>"]
     }
-  },
-  "permissions": ["activeTab", "scripting"],
-  "host_permissions": ["<all_urls>"]
+  ]
 }
